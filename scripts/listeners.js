@@ -1,20 +1,17 @@
 import { applyAction } from "./store/store.js";
 
-const btns = document.querySelectorAll(".btn");
-const wrapper = document.querySelector(".wrapper");
-btns.forEach((btn) => (btn.disabled = true));
+const menuWrapper = document.querySelector(".menu-wrapper");
+const basketWrapper = document.querySelector(".basket-wrapper");
 
 function onAction(event) {
   const { action } = event.target.closest("[data-action]")?.dataset || {};
   if (!action) return;
   const card = event.target.closest(".card");
-  const { id } = card.dataset;
-
-  if (id) {
-    applyAction(action, { id });
-  }
+  const { id } = card?.dataset || {};
+  applyAction(action, { id });
 }
 
 export function addListeners() {
-  wrapper.addEventListener("click", onAction);
+  menuWrapper.addEventListener("click", onAction);
+  basketWrapper.addEventListener("click", onAction);
 }

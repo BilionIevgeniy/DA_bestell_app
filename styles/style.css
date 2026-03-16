@@ -1,17 +1,258 @@
 @import url('./reset.css');
 :root {
-  --bg-color: #003b46;
+  --orange-primary: #ff7a2d;
+  --orange-dark: #e66a25;
+  --bg-light: #f9f9f9;
+  --card-bg: #fff5ee;
+  --text-main: #333;
+  --text-muted: #666;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
 }
 
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
+  background-color: var(--bg-light);
+  color: var(--text-main);
+}
+
+/* Header & Banner */
+.logo {
+  height: 30px;
+}
+.logo img {
+  height: 100%;
+}
+.header-top {
+  background-color: var(--orange-primary);
+  height: 80px;
+}
+
+.header-top-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-img {
+  background: url('../assets/img/hero.jpg') center/cover no-repeat;
+  height: 300px;
+  position: relative;
+}
+
+/* Main Layout */
+h1 span {
+  color: var(--orange-primary)
+}
+.main-description .title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.main-description {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-card-content-description {
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.central-img {
+  z-index: 1000;
+}
+
+.central-img img {
+
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-top: -80px;
+}
+
+/* Menu Section */
+.menu {
+  /* display: flex; */
+  position: relative;
+}
+
+.menu-subtitle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+}
+
+.menu-subtitle {
+  background-color: var(--orange-primary);
+  color: white;
+  padding: 10px 20px;
+  margin: 30px 0 15px;
 }
 
 
+/* CARD */
+.menu-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 70%;
+}
+
+.menu-card-wrapper .card {
+  display: flex;
+  background: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ffe0cc;
+  transition: transform 0.2s;
+}
+
+.card-header img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-content-description h3 {
+  margin: 0 0 5px;
+}
+
+.card-content-description p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.price {
+  font-weight: bold;
+}
+
+.add_to_card {
+  align-self: flex-end;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.add_to_card:hover {
+  background: #eee;
+}
+
+.add_to_card.active {
+  background: var(--orange-primary);
+  color: white;
+}
+
+
+/* Basket Sidebar */
+.basket-wrapper {
+  z-index: 1000;
+  width: 30%;
+  position: fixed;
+  top: 25%;
+  right: 0;
+  margin-left: auto;
+  background: #333;
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  height: fit-content;
+  .card {
+    background: #fff;
+    color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+}
+
+.amount-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.amount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price .subtotal,
+.price .delivery,
+.price .total {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.total {
+  border-top: 1px solid #555;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.buy {
+  width: 100%;
+  background: var(--orange-primary);
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.buy:hover {
+  background: var(--orange-dark);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--orange-primary);
+  height: 100px;
+  margin-top: 50px;
+}
+
 @media (max-width: 768px) {
   body {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }

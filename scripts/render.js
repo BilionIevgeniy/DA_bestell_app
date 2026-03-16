@@ -1,10 +1,16 @@
 import { state } from "./store/store.js";
-import { generateTemplate } from "./templates.js";
+import { generateBasketTemplate, generateMenuTemplate } from "./templates.js";
 
-export function renderAll(items = state) {
-  const container = document.querySelector(".wrapper");
+export function renderMenu(menu = state.menu) {
+  const container = document.querySelector(".menu-wrapper");
+  let template = "";
+  for (const key in menu) {
+    template += generateMenuTemplate(menu[key]);
+  }
+  container.innerHTML = template;
+}
 
-  container.innerHTML = [...items]
-    .map((book) => generateTemplate(item))
-    .join("");
+export function renderBasket(basket = state.basket) {
+  const container = document.querySelector(".basket-wrapper");
+  container.innerHTML = generateBasketTemplate(basket);
 }

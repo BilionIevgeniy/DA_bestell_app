@@ -1,12 +1,13 @@
 export const initialState = {
   menu: {
     burgers_and_sandwiches: {
-      src: "",
+      src: "assets/logo/Chanese.png",
       title: "Burger & Sandwiches",
       items: [
         {
           id: 1,
-          src: "",
+          addedToCard: 1,
+          src: "assets/img/veggie.png",
           name: "Veggie mushroom black burger",
           ingredients: [
             "Mixed green salad",
@@ -18,7 +19,8 @@ export const initialState = {
         },
         {
           id: 2,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/all_meat.png",
           name: "All meat burger",
           ingredients: [
             "Beef",
@@ -32,14 +34,16 @@ export const initialState = {
         },
         {
           id: 3,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/beek_burger.png",
           name: "Beef red burger",
           ingredients: ["Beef", "Cheese", "Tomatoes", "Lettuce", "Onion"],
           price: 14.9,
         },
         {
           id: 4,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/blg.png",
           name: "Big chicken burger",
           ingredients: [
             "Chicken",
@@ -54,26 +58,29 @@ export const initialState = {
       ],
     },
     pizza: {
-      src: "",
+      src: "assets/logo/Pizza.png",
       title: "Pizza  (30cm)",
       items: [
         {
           id: 5,
-          src: "",
+          addedToCard: 1,
+          src: "assets/img/margarita.png",
           name: "Pizza Margherita",
           ingredients: ["Tomato Sauce", "Mozzarella"],
           price: 11.9,
         },
         {
           id: 6,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/chorizo.png",
           name: "Pizza Chorizo",
           ingredients: ["Tomato slices", "Mozzarella", "Chorizo"],
           price: 13.9,
         },
         {
           id: 7,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/funghi.png",
           name: "Funghi",
           ingredients: [
             "Red onion",
@@ -85,7 +92,8 @@ export const initialState = {
         },
         {
           id: 8,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/quattro.png",
           name: "Quattro Formaggi with Chicken",
           ingredients: [
             "Chicken",
@@ -99,12 +107,13 @@ export const initialState = {
       ],
     },
     salad: {
-      src: "",
+      src: "assets/logo/Salad.png",
       title: "Salad",
       items: [
         {
           id: 9,
-          src: "",
+          addedToCard: 1,
+          src: "assets/img/warm_beef.png",
           name: "Warm beef arugula salad",
           ingredients: [
             "Beef",
@@ -119,7 +128,8 @@ export const initialState = {
         },
         {
           id: 10,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/mini_green.png",
           name: "Mini green Salad",
           ingredients: [
             "Green salad",
@@ -132,7 +142,8 @@ export const initialState = {
         },
         {
           id: 11,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/green.png",
           name: "Green Salad with sea food",
           ingredients: [
             "Mixed greens",
@@ -147,7 +158,8 @@ export const initialState = {
         },
         {
           id: 12,
-          src: "",
+          addedToCard: 0,
+          src: "assets/img/vegan.png",
           name: "Vegan green salad with tofu",
           ingredients: [
             "Green salad",

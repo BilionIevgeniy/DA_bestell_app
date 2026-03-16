@@ -4,6 +4,8 @@ import { ACTION_HANDLERS } from "./actions.js";
 export let state = { ...initialState };
 
 export function applyAction(action, payload = {}) {
+  console.log("action", action);
+
   const handler =
     ACTION_HANDLERS[action] ||
     function () {
