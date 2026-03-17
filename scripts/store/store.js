@@ -11,7 +11,7 @@ export function applyAction(action, payload = {}) {
     function () {
       console.warn("no action: " + action);
     };
-  state = handler(state, payload);
+  state = handler(state, payload) || state;
   saveToLocalStorage();
 }
 

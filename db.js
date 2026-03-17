@@ -198,8 +198,10 @@ export const initialState = {
         amount: 1,
       },
     ],
+    totalItems: 3,
     subtotal: 36.7,
     delivery: 4.99,
     total: 41.69,
   },
+  isBasketOpened: false,
 };

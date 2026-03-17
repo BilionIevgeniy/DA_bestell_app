@@ -1,9 +1,12 @@
+import { renderBasket, renderBasketCart } from "../render.js";
+
 export const ACTION_HANDLERS = {
   addToCard: handleAddToCard,
   deleteFromCard: handleDeleteFromCard,
   decreaseAmount: handleDecreaseAmount,
   increaseAmount: handleIncreaseAmount,
   buy: handleBuy,
+  openBasket: handleOpenBasket,
 };
 
 function handleAddToCard(state, { id }) {
@@ -37,4 +40,9 @@ function handleIncreaseAmount(state, { id }) {
 function handleBuy(state) {
   let newFirstState = state;
   return newFirstState;
+}
+
+function handleOpenBasket(state) {
+  renderBasket(true);
+  renderBasketCart(false);
 }

@@ -67,7 +67,7 @@ export function generateBasketTemplate({ items, subtotal, delivery, total }) {
         <span>${total.toFixed(2)} €</span>
       </div>
     </div>
-    <button data-action="buy" class="buy">Buy now <span>(${total} €)</span></button>
+    <button data-action="buy" class="buy-btn">Buy now <span>(${total} €)</span></button>
   `;
 }
 

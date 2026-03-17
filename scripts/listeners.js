@@ -1,7 +1,7 @@
+import { basketWrapper, menuWrapper, shopingCart } from "./selectors.js";
 import { applyAction } from "./store/store.js";
 
-const menuWrapper = document.querySelector(".menu-wrapper");
-const basketWrapper = document.querySelector(".basket-wrapper");
+const wrappers = [menuWrapper, basketWrapper, shopingCart];
 
 function onAction(event) {
   const { action } = event.target.closest("[data-action]")?.dataset || {};
@@ -12,6 +12,5 @@ function onAction(event) {
 }
 
 export function addListeners() {
-  menuWrapper.addEventListener("click", onAction);
-  basketWrapper.addEventListener("click", onAction);
+  wrappers.forEach((wrapper) => wrapper.addEventListener("click", onAction));
 }

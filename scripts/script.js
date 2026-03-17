@@ -1,10 +1,9 @@
-import { getFromLocalStorage } from "./store/store.js";
+import { getFromLocalStorage, state } from "./store/store.js";
 import { addListeners } from "./listeners.js";
-import { renderBasket, renderMenu } from "./render.js";
+import { render } from "./render.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   getFromLocalStorage();
-  renderMenu();
-  renderBasket();
+  render(state);
   addListeners();
 });
