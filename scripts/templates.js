@@ -1,4 +1,4 @@
-export function generateMenuTemplate({ src, title, items }) {
+export function generateMenuTemplate(category, { src, title, items }) {
   return /*html*/ `
     <section>
       <div class="menu-subtitle">
@@ -11,23 +11,19 @@ export function generateMenuTemplate({ src, title, items }) {
       </div>
       <div class="container">
         <div class="menu-card-wrapper">
-          ${items.map(generateCardTemplate).join("")}
+          ${items.map((item) => generateCardTemplate(category, item)).join("")}
         </div>
       </div>
     </section>
   `;
 }
 
-export function generateCardTemplate({
-  id,
-  src,
-  name,
-  ingredients,
-  price,
-  addedToCard,
-}) {
+export function generateCardTemplate(
+  category,
+  { id, src, name, ingredients, price, countInBasket },
+) {
   return /*html*/ `
-  <div class="card" data-id="${id}">
+  <div class="card" data-id="${id}" data-category="${category}">
     <div class="card-img">
       <img src="${src}" alt="${name}">
     </div>
@@ -41,7 +37,7 @@ export function generateCardTemplate({
           ${price.toFixed(2)}€
         </span>
       </div>
-      <button data-action="addToCard" class="add_to_card ${addedToCard > 0 ? "active" : ""}">${addedToCard > 0 ? "Added " + addedToCard : "Add to basket"}</button>
+      <button data-action="addToBasket" class="add_to_card ${countInBasket > 0 ? "active" : ""}">${generateAddBtnInnerHTML(countInBasket)}</button>
     </div>
   </div>
   `;
@@ -53,27 +49,22 @@ export function generateBasketTemplate({ items, subtotal, delivery, total }) {
     <div class="basket-card-wrapper">
      ${items.map(generateBasketCardTemplate).join("")}
     </div>
-    <div class="price">
-      <div class="subtotal">
-        <span>Subtotal</span>
-        <span>${subtotal.toFixed(2)} €</span>
-      </div>
-      <div class="delivery">
-        <span>Delivery fee</span>
-        <span>${delivery.toFixed(2)} €</span>
-      </div>
-      <div class="total">
-        <span>Total</span>
-        <span>${total.toFixed(2)} €</span>
-      </div>
+    <div class="price-wrapper">
+      ${generateBasketManePriceTemplate({ subtotal, delivery, total })}
     </div>
-    <button data-action="buy" class="buy-btn">Buy now <span>(${total} €)</span></button>
+    <button data-action="buy" class="buy-btn">Buy now (<span class="buy-btn-span">${total.toFixed(2)} €</span>)</button>
   `;
 }
 
-export function generateBasketCardTemplate({ id, name, price, amount }) {
+export function generateBasketCardTemplate({
+  id,
+  name,
+  price,
+  amount,
+  category,
+}) {
   return /*html*/ `
-    <div data-id="${id}" class="card">
+    <div data-category="${category}" data-id="${id}" class="card">
       <div class="title">
         ${amount} x ${name}
       </div>
@@ -92,5 +83,26 @@ export function generateBasketCardTemplate({ id, name, price, amount }) {
         </div>
       </div>
     </div>
+  `;
+}
+
+export function generateAddBtnInnerHTML(countInBasket) {
+  return countInBasket > 0 ? "Added " + countInBasket : "Add to basket";
+}
+
+export function generateBasketManePriceTemplate({ subtotal, delivery, total }) {
+  return /*html*/ `
+    <div class="subtotal">
+      <span>Subtotal</span>
+      <span>${subtotal.toFixed(2)} €</span>
+    </div>
+    <div class="delivery">
+      <span>Delivery fee</span>
+      <span>${delivery.toFixed(2)} €</span>
+    </div>
+    <div class="total">
+      <span>Total</span>
+      <span>${total.toFixed(2)} €</span>
+    </div>  
   `;
 }

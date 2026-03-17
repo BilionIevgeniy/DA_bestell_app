@@ -189,10 +189,14 @@ h1 span {
   .card {
     background: #fff;
     color: #333;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
+}
+.basket-card-wrapper {
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
 .amount {
@@ -207,13 +211,13 @@ h1 span {
   margin-top: 10px;
 }
 
-.price {
+.price-wrapper {
   font-weight: bold;
 }
 
-.price .subtotal,
-.price .delivery,
-.price .total {
+.price-wrapper .subtotal,
+.price-wrapper .delivery,
+.price-wrapper .total {
   display: flex;
   justify-content: space-between;
   padding: 5px 0;
@@ -268,6 +272,7 @@ h1 span {
     justify-content: center;
     right: -5px;
     bottom: -5px;
+    border: 1px solid var(--cart-bg);
     border-radius: 50%;
     height: 25px;
     width: 25px;

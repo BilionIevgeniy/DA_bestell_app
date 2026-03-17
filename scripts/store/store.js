@@ -1,27 +1,25 @@
 import { initialState } from "../../db.js";
 import { ACTION_HANDLERS } from "./actions.js";
 
-export let state = { ...initialState };
+export let globalState = { ...initialState };
 
 export function applyAction(action, payload = {}) {
-  console.log("action", action);
-
   const handler =
     ACTION_HANDLERS[action] ||
     function () {
       console.warn("no action: " + action);
     };
-  state = handler(state, payload) || state;
+  globalState = handler(globalState, payload) || globalState;
   saveToLocalStorage();
 }
 
 export function saveToLocalStorage() {
-  localStorage.setItem("state", JSON.stringify(state));
+  localStorage.setItem("globalState", JSON.stringify(globalState));
 }
 
 export function getFromLocalStorage() {
-  const lsState = JSON.parse(localStorage.getItem("state"));
+  const lsState = JSON.parse(localStorage.getItem("globalState"));
   if (lsState) {
-    Object.assign(state, lsState);
+    Object.assign(globalState, { ...lsState, isBasketOpened: false });
   }
 }

@@ -6,7 +6,7 @@ export const initialState = {
       items: [
         {
           id: 1,
-          addedToCard: 1,
+          countInBasket: 1,
           src: "assets/img/veggie.png",
           name: "Veggie mushroom black burger",
           ingredients: [
@@ -19,7 +19,7 @@ export const initialState = {
         },
         {
           id: 2,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/all_meat.png",
           name: "All meat burger",
           ingredients: [
@@ -34,7 +34,7 @@ export const initialState = {
         },
         {
           id: 3,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/beek_burger.png",
           name: "Beef red burger",
           ingredients: ["Beef", "Cheese", "Tomatoes", "Lettuce", "Onion"],
@@ -42,7 +42,7 @@ export const initialState = {
         },
         {
           id: 4,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/blg.png",
           name: "Big chicken burger",
           ingredients: [
@@ -63,7 +63,7 @@ export const initialState = {
       items: [
         {
           id: 5,
-          addedToCard: 1,
+          countInBasket: 1,
           src: "assets/img/margarita.png",
           name: "Pizza Margherita",
           ingredients: ["Tomato Sauce", "Mozzarella"],
@@ -71,7 +71,7 @@ export const initialState = {
         },
         {
           id: 6,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/chorizo.png",
           name: "Pizza Chorizo",
           ingredients: ["Tomato slices", "Mozzarella", "Chorizo"],
@@ -79,7 +79,7 @@ export const initialState = {
         },
         {
           id: 7,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/funghi.png",
           name: "Funghi",
           ingredients: [
@@ -92,7 +92,7 @@ export const initialState = {
         },
         {
           id: 8,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/quattro.png",
           name: "Quattro Formaggi with Chicken",
           ingredients: [
@@ -112,7 +112,7 @@ export const initialState = {
       items: [
         {
           id: 9,
-          addedToCard: 1,
+          countInBasket: 1,
           src: "assets/img/warm_beef.png",
           name: "Warm beef arugula salad",
           ingredients: [
@@ -128,7 +128,7 @@ export const initialState = {
         },
         {
           id: 10,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/mini_green.png",
           name: "Mini green Salad",
           ingredients: [
@@ -142,7 +142,7 @@ export const initialState = {
         },
         {
           id: 11,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/green.png",
           name: "Green Salad with sea food",
           ingredients: [
@@ -158,7 +158,7 @@ export const initialState = {
         },
         {
           id: 12,
-          addedToCard: 0,
+          countInBasket: 0,
           src: "assets/img/vegan.png",
           name: "Vegan green salad with tofu",
           ingredients: [
@@ -181,18 +181,21 @@ export const initialState = {
     items: [
       {
         id: 1,
+        category: "burgers_and_sandwiches",
         name: "Veggie mushroom black burger",
         price: 16.9,
         amount: 1,
       },
       {
         id: 5,
+        category: "pizza",
         name: "Pizza Margherita",
         price: 11.9,
         amount: 1,
       },
       {
         id: 9,
+        category: "salad",
         name: "Warm beef arugula salad",
         price: 16.9,
         amount: 1,
@@ -204,4 +207,5 @@ export const initialState = {
     total: 41.69,
   },
   isBasketOpened: false,
+  isBasketCartOpened: false,
 };

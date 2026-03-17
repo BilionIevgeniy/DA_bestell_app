@@ -7,8 +7,8 @@ function onAction(event) {
   const { action } = event.target.closest("[data-action]")?.dataset || {};
   if (!action) return;
   const card = event.target.closest(".card");
-  const { id } = card?.dataset || {};
-  applyAction(action, { id });
+  const payload = card?.dataset || {};
+  applyAction(action, payload);
 }
 
 export function addListeners() {
