@@ -11,14 +11,14 @@ export function generateMenuTemplate(category, { src, title, items }) {
       </div>
       <div class="container">
         <div class="menu-card-wrapper">
-          ${items.map((item) => generateCardTemplate(category, item)).join("")}
+          ${items.map((item) => generateMenuCardTemplate(category, item)).join("")}
         </div>
       </div>
     </section>
   `;
 }
 
-export function generateCardTemplate(
+export function generateMenuCardTemplate(
   category,
   { id, src, name, ingredients, price, countInBasket },
 ) {
@@ -69,15 +69,7 @@ export function generateBasketCardTemplate({
         ${amount} x ${name}
       </div>
       <div class="amount-wrapper">
-        <div class="amount">
-          ${
-            amount == 1
-              ? '<button data-action="deleteFromCard" class="del"><img src="assets/logo/delete.png" alt="Delete"></button>'
-              : '<button data-action="decreaseAmount" class="del">-</button>'
-          }
-           ${amount}
-          <button data-action="increaseAmount" class="del">+</button>
-        </div>
+        ${generateBasketCardsActionBtns(amount)}
         <div class="price">
           ${price.toFixed(2)} €
         </div>
@@ -104,5 +96,19 @@ export function generateBasketManePriceTemplate({ subtotal, delivery, total }) {
       <span>Total</span>
       <span>${total.toFixed(2)} €</span>
     </div>  
+  `;
+}
+
+export function generateBasketCardsActionBtns(amount) {
+  return /*html */ `
+  <div class="amount">
+    ${
+      amount == 1
+        ? '<button data-action="deleteFromCard" class="del"><img src="assets/logo/delete.png" alt="Delete"></button>'
+        : '<button data-action="decreaseAmount" class="del">-</button>'
+    }
+     ${amount}
+    <button data-action="increaseAmount" class="del">+</button>
+  </div>
   `;
 }

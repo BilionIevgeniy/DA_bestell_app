@@ -1,16 +1,14 @@
 import {
   renderAddBtnById,
   renderBasket,
-  renderBasketCart,
+  renderCart,
   renderBasketItemById,
   renderBasketPriceTemplate,
 } from "../render.js";
 import {
-  addBasketTotalItems,
-  addItemToBasket,
-  changeAndGetCountInBasket,
-  findItemById,
-  recalcPrice,
+  changeItemAmount,
+  onAmountChange,
+  onDeleteItemFromBasket,
   setIsBasketOpen,
 } from "./helpers.js";
 
@@ -24,42 +22,53 @@ export const ACTION_HANDLERS = {
 };
 
 function handleAddToBasket(state, { id, category }) {
+  console.log("category", category);
+
   let copyState = structuredClone(state);
-  const [newItem, count] = changeAndGetCountInBasket(copyState, id, category);
-  copyState = addBasketTotalItems(copyState, 1);
-  const existedItem = findItemById(copyState.basket.items, newItem.id);
-  copyState = addItemToBasket(copyState, newItem, existedItem);
+  const [modifiedState, count, existedInBasketItem] = changeItemAmount(
+    copyState,
+    id,
+    category,
+    true,
+  );
+  copyState = modifiedState;
   renderAddBtnById(id, count);
-  copyState = recalcPrice(copyState);
   if (copyState.isBasketOpened) {
-    renderBasketItemById(newItem.id, !!existedItem, copyState);
+    renderBasketItemById({
+      id,
+      isExisted: !!existedInBasketItem,
+      state: copyState,
+    });
     renderBasketPriceTemplate(copyState);
   } else {
-    renderBasketCart(true, copyState.basket.totalItems);
+    renderCart(true, copyState.basket.totalItems);
   }
   return copyState;
 }
 
 function handleOpenBasket(state) {
   let copyState = structuredClone(state);
-  renderBasket(true, copyState.basket);
   copyState = setIsBasketOpen(true, copyState);
-  renderBasketCart(false, copyState.basket.totalItems);
+  renderBasket(true, copyState.basket);
+  renderCart(false, copyState.basket.totalItems);
   return copyState;
 }
 
-function handleDeleteFromCard(state, { id }) {
+function handleDecreaseAmount(state, { id, category }) {
   let copyState = structuredClone(state);
+  copyState = onAmountChange(copyState, id, category, false);
   return copyState;
 }
 
-function handleDecreaseAmount(state, { id }) {
+function handleIncreaseAmount(state, { id, category }) {
   let copyState = structuredClone(state);
+  copyState = onAmountChange(copyState, id, category, true);
   return copyState;
 }
 
-function handleIncreaseAmount(state, { id }) {
+function handleDeleteFromCard(state, { id, category }) {
   let copyState = structuredClone(state);
+  copyState = onDeleteItemFromBasket(copyState, id, category);
   return copyState;
 }
 

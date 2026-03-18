@@ -207,5 +207,5 @@ export const initialState = {
     total: 41.69,
   },
   isBasketOpened: false,
-  isBasketCartOpened: false,
+  isCartOpened: false,
 };
