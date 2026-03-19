@@ -1,29 +1,20 @@
 import {
   renderAddBtnById,
   renderBasket,
-  renderCart,
   renderBasketItemById,
   renderBasketPriceTemplate,
+  renderCart,
+  renderModal,
 } from "../render.js";
 import {
   changeItemAmount,
-  onAmountChange,
-  onDeleteItemFromBasket,
+  removeItemFromState,
+  renderAfterDeleteFromBasket,
   setIsBasketOpen,
+  setIsCartOpen,
 } from "./helpers.js";
 
-export const ACTION_HANDLERS = {
-  addToBasket: handleAddToBasket,
-  deleteFromCard: handleDeleteFromCard,
-  decreaseAmount: handleDecreaseAmount,
-  increaseAmount: handleIncreaseAmount,
-  buy: handleBuy,
-  openBasket: handleOpenBasket,
-};
-
-function handleAddToBasket(state, { id, category }) {
-  console.log("category", category);
-
+export function onAddItemToBasket(state, id, category) {
   let copyState = structuredClone(state);
   const [modifiedState, count, existedInBasketItem] = changeItemAmount(
     copyState,
@@ -46,33 +37,72 @@ function handleAddToBasket(state, { id, category }) {
   return copyState;
 }
 
-function handleOpenBasket(state) {
+export function onCloseBasket(state) {
   let copyState = structuredClone(state);
+
+  copyState = setIsBasketOpen(false, copyState);
+  copyState = setIsCartOpen(true, copyState);
+  renderBasket(false, copyState.basket);
+  renderCart(true, copyState.basket.totalItems);
+
+  return copyState;
+}
+
+export function onOpenBasket(state) {
+  let copyState = structuredClone(state);
+
   copyState = setIsBasketOpen(true, copyState);
+  copyState = setIsCartOpen(false, copyState);
   renderBasket(true, copyState.basket);
   renderCart(false, copyState.basket.totalItems);
+
   return copyState;
 }
 
-function handleDecreaseAmount(state, { id, category }) {
+export function onChangeAmountItemsInBasket(state, id, category, increase) {
   let copyState = structuredClone(state);
-  copyState = onAmountChange(copyState, id, category, false);
+
+  const [modifiedState, count, existedInBasketItem] = changeItemAmount(
+    copyState,
+    id,
+    category,
+    increase,
+  );
+  copyState = modifiedState;
+  renderAddBtnById(id, count);
+  renderBasketItemById({
+    id,
+    isExisted: !!existedInBasketItem,
+    state: copyState,
+  });
+  renderBasketPriceTemplate(copyState);
+
   return copyState;
 }
 
-function handleIncreaseAmount(state, { id, category }) {
+export function onDeleteItemFromBasket(state, id, category) {
   let copyState = structuredClone(state);
-  copyState = onAmountChange(copyState, id, category, true);
+
+  copyState = removeItemFromState(copyState, id, category);
+  renderAddBtnById(id, 0);
+  copyState = renderAfterDeleteFromBasket(copyState, id);
+
   return copyState;
 }
 
-function handleDeleteFromCard(state, { id, category }) {
+export function onDeleteAllItemsFromBasket(state) {
   let copyState = structuredClone(state);
-  copyState = onDeleteItemFromBasket(copyState, id, category);
+  const basketItems = copyState.basket.items;
+  basketItems.forEach(({ id, category }) => {
+    copyState = removeItemFromState(copyState, id, category, true);
+    renderAddBtnById(id, 0);
+  });
+  copyState = renderAfterDeleteFromBasket(copyState);
+  renderModal(true);
+
   return copyState;
 }
 
-function handleBuy(state) {
-  let copyState = structuredClone(state);
-  return copyState;
+export function onCloseModal() {
+  renderModal(false);
 }

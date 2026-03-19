@@ -45,7 +45,10 @@ export function generateMenuCardTemplate(
 
 export function generateBasketTemplate({ items, subtotal, delivery, total }) {
   return /*html*/ `
-    <h3>Your Basket</h3>
+    <div class="basket-top">
+      <h3>Your Basket</h3>
+      <button data-action="closeBasket">x</button>
+    </div>
     <div class="basket-card-wrapper">
      ${items.map(generateBasketCardTemplate).join("")}
     </div>

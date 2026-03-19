@@ -1,4 +1,4 @@
-import { basketWrapper, menuWrapper, shopingCart } from "./selectors.js";
+import { basketWrapper, menuWrapper, modal, shopingCart } from "./selectors.js";
 import { globalState } from "./store/store.js";
 import {
   generateAddBtnInnerHTML,
@@ -79,7 +79,7 @@ export function renderBasketPriceTemplate(state) {
   buyBtnSpan.innerHTML = total.toFixed(2);
 }
 
-export function renderBasketCardsActionBtns(id, amount) {
+export function renderBasketCardActionsBtns(id, amount) {
   const card = basketWrapper.querySelector(`[data-id=${id}]`);
   const amountComponent = card.querySelector(".amount");
   const content = generateBasketCardsActionBtns(amount);
@@ -89,4 +89,8 @@ export function renderBasketCardsActionBtns(id, amount) {
 export function render(state) {
   renderMenu();
   renderCart(state.basket.totalItems > 0, state.basket.totalItems);
+}
+
+export function renderModal(open) {
+  modal.style.display = open ? "flex" : "none";
 }

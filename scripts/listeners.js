@@ -1,7 +1,7 @@
-import { basketWrapper, menuWrapper, shopingCart } from "./selectors.js";
+import { basketWrapper, menuWrapper, modal, shopingCart } from "./selectors.js";
 import { applyAction } from "./store/store.js";
 
-const wrappers = [menuWrapper, basketWrapper, shopingCart];
+const wrappers = [menuWrapper, basketWrapper, shopingCart, modal];
 
 function onAction(event) {
   const { action } = event.target.closest("[data-action]")?.dataset || {};

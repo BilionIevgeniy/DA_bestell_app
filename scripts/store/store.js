@@ -1,11 +1,11 @@
 import { initialState } from "../../db.js";
-import { ACTION_HANDLERS } from "./actions.js";
+import { HANDLERS } from "./handlers.js";
 
 export let globalState = { ...initialState };
 
 export function applyAction(action, payload = {}) {
   const handler =
-    ACTION_HANDLERS[action] ||
+    HANDLERS[action] ||
     function () {
       console.warn("no action: " + action);
     };

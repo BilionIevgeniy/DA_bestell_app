@@ -1,14 +1,18 @@
 import {
-  renderAddBtnById,
-  renderRemoveBasketItemById,
+  renderBasket,
   renderBasketPriceTemplate,
   renderCart,
-  renderBasket,
-  renderBasketItemById,
+  renderRemoveBasketItemById,
 } from "../render.js";
 
 // MENU
-export function changeMenuItemCount({ state, id, category, increase }) {
+export function changeMenuItemsCountInBasket({
+  state,
+  id,
+  category,
+  increase,
+  deleteAll,
+}) {
   const copyState = structuredClone(state);
 
   let newItem;
@@ -16,7 +20,11 @@ export function changeMenuItemCount({ state, id, category, increase }) {
   copyState.menu[category].items = copyState.menu[category].items.map(
     (item) => {
       if (item.id == id) {
-        count = increase ? item.countInBasket + 1 : item.countInBasket - 1;
+        count = deleteAll
+          ? 0
+          : increase
+            ? item.countInBasket + 1
+            : item.countInBasket - 1;
         newItem = { ...item, countInBasket: count };
         return newItem;
       }
@@ -38,12 +46,13 @@ export function removeItemFromBasketState(state, id) {
   return copyState;
 }
 
-export function addBasketTotalItems(state, increase) {
+export function addBasketTotalItems(state, increase, deleteAll) {
   const copyState = structuredClone(state);
-
-  copyState.basket.totalItems = increase
-    ? copyState.basket.totalItems + 1
-    : copyState.basket.totalItems - 1;
+  copyState.basket.totalItems = deleteAll
+    ? 0
+    : increase
+      ? copyState.basket.totalItems + 1
+      : copyState.basket.totalItems - 1;
 
   return copyState;
 }
@@ -91,30 +100,6 @@ export function recalcPrice(state) {
   return copyState;
 }
 
-export function onDeleteItemFromBasket(state, id, category) {
-  let copyState = structuredClone(state);
-
-  copyState = removeItemFromState(copyState, id, category);
-  renderAddBtnById(id, 0);
-  if (!copyState.basket.totalItems) {
-    renderCart(false);
-    renderBasket(false);
-    copyState = setIsBasketOpen(false, copyState);
-    copyState = setIsCartOpen(false, copyState);
-  } else {
-    renderRemoveBasketItemById(id);
-    renderBasketPriceTemplate(copyState);
-  }
-
-  return copyState;
-}
-
-export function setIsBasketOpen(open, state) {
-  const copyState = structuredClone(state);
-  copyState.isBasketOpened = open;
-  return copyState;
-}
-
 // GENERAL
 export function findItemById(items, id) {
   return items.find((item) => item.id == id);
@@ -123,7 +108,7 @@ export function findItemById(items, id) {
 export function changeItemAmount(state, id, category, increase) {
   let copyState = structuredClone(state);
 
-  const [newMenuItem, count, modyfiedState] = changeMenuItemCount({
+  const [newMenuItem, count, modyfiedState] = changeMenuItemsCountInBasket({
     state: copyState,
     id,
     category,
@@ -145,45 +130,47 @@ export function changeItemAmount(state, id, category, increase) {
   return [copyState, count, existedItem];
 }
 
-export function removeItemFromState(state, id, category) {
+export function removeItemFromState(state, id, category, deleteAll) {
   let copyState = structuredClone(state);
 
-  const [_, __, modyfiedState] = changeMenuItemCount({
+  const [_, __, modyfiedState] = changeMenuItemsCountInBasket({
     state: copyState,
     id,
     category,
     increase: false,
+    deleteAll,
   });
   copyState = modyfiedState;
-  copyState = addBasketTotalItems(copyState, false);
+  copyState = addBasketTotalItems(copyState, false, deleteAll);
   copyState = removeItemFromBasketState(copyState, id);
   copyState = recalcPrice(copyState);
-  return copyState;
-}
-
-export function onAmountChange(state, id, category, increase) {
-  let copyState = structuredClone(state);
-
-  const [modifiedState, count, existedInBasketItem] = changeItemAmount(
-    copyState,
-    id,
-    category,
-    increase,
-  );
-  copyState = modifiedState;
-  renderAddBtnById(id, count);
-  renderBasketItemById({
-    id,
-    isExisted: !!existedInBasketItem,
-    state: copyState,
-  });
-  renderBasketPriceTemplate(copyState);
-
   return copyState;
 }
 
 export function setIsCartOpen(open, state) {
   const copyState = structuredClone(state);
   copyState.isCartOpened = open;
+  return copyState;
+}
+
+export function setIsBasketOpen(open, state) {
+  const copyState = structuredClone(state);
+  copyState.isBasketOpened = open;
+  return copyState;
+}
+
+export function renderAfterDeleteFromBasket(state, id) {
+  let copyState = structuredClone(state);
+
+  if (!copyState.basket.totalItems) {
+    renderCart(false);
+    renderBasket(false);
+    copyState = setIsBasketOpen(false, copyState);
+    copyState = setIsCartOpen(false, copyState);
+  } else {
+    renderRemoveBasketItemById(id);
+    renderBasketPriceTemplate(copyState);
+  }
+
   return copyState;
 }

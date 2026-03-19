@@ -5,9 +5,11 @@
   --bg-light: #f9f9f9;
   --card-bg: #fff5ee;
   --cart-bg: #666;
+  --popup-bg: rgba(76, 73, 73, 0.8);
+  --popup-content-bg: #1c1b1b;
   --text-main: #333;
   --text-muted: #666;
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -171,6 +173,10 @@ h1 span {
   color: white;
 }
 
+.add_to_card.active:hover {
+  background: var(--orange-dark);
+}
+
 
 /* Basket Sidebar */
 .basket-wrapper {
@@ -194,7 +200,22 @@ h1 span {
     margin-bottom: 10px;
   }
 }
+
+.basket-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  button {
+    font-size: 3rem;
+    color: inherit;
+  }
+}
+
 .basket-card-wrapper {
+  padding: 1rem;
+  ;
   max-height: 300px;
   overflow-y: scroll;
 }
@@ -280,6 +301,56 @@ h1 span {
     background-color: var(--orange-primary);
   }
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--popup-bg);
+  z-index: 10000;
+
+}
+.modal-content {
+  background-color: var(--popup-content-bg);
+  padding: 3rem;
+  color: var(--bg-light);
+  width: 300px;
+  border-radius: 15px;
+  h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.6rem;
+  }
+  p {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+.close_modal {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2rem;
+}
+.close_modal button {
+  line-height: 0;
+  height: 2rem;
+  font-size: 2.5rem;
+  color: inherit;
+}
+.modal-img {
+  text-align: center;
+  margin-bottom: 2rem;
+  height: 6rem;
+  img {
+    height: 100%;
+  }
+}
+
 
 @media (max-width: 768px) {
   body {
