@@ -14,6 +14,7 @@ import {
   setIsCartOpen,
   setWidthToSelector,
 } from "./helpers.js";
+const body = document.body;
 
 export function onAddItemToBasket(state, id, category) {
   let copyState = structuredClone(state);
@@ -38,17 +39,6 @@ export function onAddItemToBasket(state, id, category) {
   return copyState;
 }
 
-export function onCloseBasket(state) {
-  let copyState = structuredClone(state);
-
-  copyState = setIsBasketOpen(false, copyState);
-  copyState = setIsCartOpen(true, copyState);
-  renderBasket(false, copyState.basket);
-  renderCart(true, copyState.basket.totalItems);
-  setWidthToSelector(".menu-card-wrapper", "100%");
-  return copyState;
-}
-
 export function onOpenBasket(state) {
   let copyState = structuredClone(state);
 
@@ -57,6 +47,19 @@ export function onOpenBasket(state) {
   renderBasket(true, copyState.basket);
   renderCart(false, copyState.basket.totalItems);
   setWidthToSelector(".menu-card-wrapper", "75%");
+
+  return copyState;
+}
+
+export function onCloseBasket(state) {
+  let copyState = structuredClone(state);
+
+  copyState = setIsBasketOpen(false, copyState);
+  copyState = setIsCartOpen(true, copyState);
+  renderBasket(false, copyState.basket);
+  renderCart(true, copyState.basket.totalItems);
+  setWidthToSelector(".menu-card-wrapper", "100%");
+
   return copyState;
 }
 

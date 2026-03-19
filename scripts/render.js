@@ -19,9 +19,14 @@ export function renderMenu(menu = globalState.menu) {
 
 export function renderBasket(show, basket = globalState.basket) {
   if (show) {
+    const isMobile = window.innerWidth <= 767;
+    if (isMobile) {
+      document.body.classList.add("no-scroll");
+    }
     basketWrapper.style.display = "flex";
     basketWrapper.innerHTML = generateBasketTemplate(basket);
   } else {
+    document.body.classList.remove("no-scroll");
     basketWrapper.style.display = "none";
   }
 }
@@ -92,5 +97,10 @@ export function render(state) {
 }
 
 export function renderModal(open) {
+  if (open) {
+    document.body.classList.add("no-scroll");
+  } else {
+    document.body.classList.remove("no-scroll");
+  }
   modal.style.display = open ? "flex" : "none";
 }
