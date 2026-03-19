@@ -174,3 +174,10 @@ export function renderAfterDeleteFromBasket(state, id) {
 
   return copyState;
 }
+
+export function setWidthToSelector(selector, width) {
+  const containers = document.querySelectorAll(selector);
+  containers.forEach((container) => {
+    container.style.width = width;
+  });
+}

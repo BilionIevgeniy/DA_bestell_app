@@ -12,6 +12,7 @@ import {
   renderAfterDeleteFromBasket,
   setIsBasketOpen,
   setIsCartOpen,
+  setWidthToSelector,
 } from "./helpers.js";
 
 export function onAddItemToBasket(state, id, category) {
@@ -44,7 +45,7 @@ export function onCloseBasket(state) {
   copyState = setIsCartOpen(true, copyState);
   renderBasket(false, copyState.basket);
   renderCart(true, copyState.basket.totalItems);
-
+  setWidthToSelector(".menu-card-wrapper", "100%");
   return copyState;
 }
 
@@ -55,7 +56,7 @@ export function onOpenBasket(state) {
   copyState = setIsCartOpen(false, copyState);
   renderBasket(true, copyState.basket);
   renderCart(false, copyState.basket.totalItems);
-
+  setWidthToSelector(".menu-card-wrapper", "75%");
   return copyState;
 }
 
@@ -98,6 +99,7 @@ export function onDeleteAllItemsFromBasket(state) {
     renderAddBtnById(id, 0);
   });
   copyState = renderAfterDeleteFromBasket(copyState);
+  setWidthToSelector(".menu-card-wrapper", "100%");
   renderModal(true);
 
   return copyState;

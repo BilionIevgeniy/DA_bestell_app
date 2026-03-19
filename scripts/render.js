@@ -19,7 +19,7 @@ export function renderMenu(menu = globalState.menu) {
 
 export function renderBasket(show, basket = globalState.basket) {
   if (show) {
-    basketWrapper.style.display = "block";
+    basketWrapper.style.display = "flex";
     basketWrapper.innerHTML = generateBasketTemplate(basket);
   } else {
     basketWrapper.style.display = "none";

@@ -6,7 +6,7 @@
   <script src="scripts/script.js" type="module"></script>
   <link rel="stylesheet" href="styles/style.css">
   <link rel="icon" type="image/x-icon" href="assets/logo/logo.png">
-  <title>Title</title>
+  <title>Bestell App</title>
 </head>
 <body>
   <header class="header">
@@ -34,20 +34,22 @@
       <p>The best of Burgers, Pizza, and Greens, all in one great place.</p>
     </div>
     <div class="menu">
-      <div class="basket-wrapper">
-
-      </div>
       <div class="menu-wrapper">
-
       </div>
     </div>
 
   </main>
-  <div data-action="openBasket" class="shoping_cart">
-    <span>5</span>
-    <img src="assets/logo/shopping_cart.png" alt="shoping cart">
+  <div class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>2025 BurgerHouse</p>
+        <p>Imprint</p>
+        <p>Cookie Preferences</p>
+      </div>
+    </div>
   </div>
-  <div class="footer"></div>
+
+  <!-- Fixed -->
   <div class="modal">
     <div class="modal-content">
       <div data-action="closeModal" class="close_modal"><button>x</button></div>
@@ -58,6 +60,10 @@
       <p>Your food is on the way!</p>
     </div>
   </div>
-
+  <div class="basket-wrapper"></div>
+  <div data-action="openBasket" class="shoping_cart">
+    <span>5</span>
+    <img src="assets/logo/shopping_cart.png" alt="shoping cart">
+  </div>
 </body>
 </html>

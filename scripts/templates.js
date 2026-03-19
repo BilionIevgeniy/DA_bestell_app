@@ -31,7 +31,7 @@ export function generateMenuCardTemplate(
       <div class="card-content-wrapper">
         <div class="content-wrapper-description">
           <h3>${name}</h3>
-          <p>${ingredients.join("")}</p>
+          <p>${ingredients.join(", ")}</p>
         </div>
         <span class="price">
           ${price.toFixed(2)}€
@@ -45,17 +45,19 @@ export function generateMenuCardTemplate(
 
 export function generateBasketTemplate({ items, subtotal, delivery, total }) {
   return /*html*/ `
-    <div class="basket-top">
-      <h3>Your Basket</h3>
-      <button data-action="closeBasket">x</button>
+    <div class="basket-content">
+      <div class="basket-top">
+        <h3>Your Basket</h3>
+        <button data-action="closeBasket">x</button>
+      </div>
+      <div class="basket-card-wrapper">
+      ${items.map(generateBasketCardTemplate).join("")}
+      </div>
+      <div class="price-wrapper">
+        ${generateBasketManePriceTemplate({ subtotal, delivery, total })}
+      </div>
+      <button data-action="buy" class="buy-btn">Buy now (<span class="buy-btn-span">${total.toFixed(2)} €</span>)</button>
     </div>
-    <div class="basket-card-wrapper">
-     ${items.map(generateBasketCardTemplate).join("")}
-    </div>
-    <div class="price-wrapper">
-      ${generateBasketManePriceTemplate({ subtotal, delivery, total })}
-    </div>
-    <button data-action="buy" class="buy-btn">Buy now (<span class="buy-btn-span">${total.toFixed(2)} €</span>)</button>
   `;
 }
 
