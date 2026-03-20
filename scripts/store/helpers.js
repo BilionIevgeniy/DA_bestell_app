@@ -167,6 +167,7 @@ export function renderAfterDeleteFromBasket(state, id) {
     renderBasket(false);
     copyState = setIsBasketOpen(false, copyState);
     copyState = setIsCartOpen(false, copyState);
+    setWidthToSelector(".menu-card-wrapper", "100%");
   } else {
     renderRemoveBasketItemById(id);
     renderBasketPriceTemplate(copyState);
